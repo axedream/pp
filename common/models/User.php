@@ -5,6 +5,7 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
 
 /**
@@ -64,31 +65,69 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Читаем роли
-     *
-     * @return array
+     * {@inheritdoc}
      */
-    public static function roles()
+    public function attributeLabels()
     {
         return [
-            self::ROLE_USER => Yii::t('app', 'User'),
-            self::ROLE_ADMIN => Yii::t('app', 'Admin'),
+            'username' => 'Имя пользователя',
         ];
     }
 
 
+
     /**
-     * Название роли
-     * @param int $id
-     * @return mixed|null
+     * Читаем роли
+     *
+     * @return array
      */
-    public function getRoleName(int $id)
+    public static function getRoleArray()
     {
-        $list = self::roles();
-        return $list[$id] ?? null;
+        return [
+            self::ROLE_USER => 'Пользователь',
+            self::ROLE_ADMIN => 'Администратор',
+        ];
     }
 
-    public function isAdmin()
+    /**
+     * Статусы пользователей
+     *
+     * @return array
+     */
+    public static function getStatusesArray()
+    {
+        return [
+            self::STATUS_DELETED => 'Удален',
+            self::STATUS_ACTIVE => 'Активен',
+            self::STATUS_INACTIVE => 'Заблокирован/Новый'
+        ];
+    }
+
+    /**
+     * Получаем список статусов
+     *
+     * @return mixed
+     * @throws \Exception
+     */
+    public function getStatusName()
+    {
+        return ArrayHelper::getValue(self::getStatusesArray(), $this->status);
+    }
+
+
+    /**
+     * Получаем список статусов
+     *
+     * @return mixed
+     * @throws \Exception
+     */
+    public function getRoleName()
+    {
+        return ArrayHelper::getValue(self::getRoleArray(), $this->role);
+    }
+
+
+    public function getIsAdmin()
     {
         return ($this->role == self::ROLE_ADMIN);
     }
