@@ -40,9 +40,9 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '' => 'chat/basic/index',
-                'site' => 'chat/basic/index',
-                'site/index' => 'chat/basic/index',
+                '' => 'chat/index/index',
+                'site' => 'chat/index/index',
+                'site/index' => 'chat/index/index',
             ],
         ],
     ],
