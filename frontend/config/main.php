@@ -36,14 +36,15 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '' => 'chat/basic/index',
+                'site' => 'chat/basic/index',
+                'site/index' => 'chat/basic/index',
             ],
         ],
-        */
     ],
     'params' => $params,
 ];

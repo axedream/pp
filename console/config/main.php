@@ -20,6 +20,14 @@ return [
             'class' => 'yii\console\controllers\FixtureController',
             'namespace' => 'common\fixtures',
           ],
+        'migrate-mymodule' => [
+            'class' => 'yii\console\controllers\MigrateController',
+            'migrationNamespaces' => [
+                'common\modules\chat\migrations',
+
+            ],
+            'migrationPath' => '@common\modules\chat\migrations',
+        ],
     ],
     'components' => [
         'log' => [
