@@ -51,7 +51,9 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'chat' => 'chat/chat/index'
+                'site'=> 'chat/chat/index',
+                'site/index'=> 'chat/chat/index',
+                'chat' => 'chat/chat/index',
             ],
         ],
     ],

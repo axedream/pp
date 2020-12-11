@@ -59,7 +59,7 @@ class SiteController extends BasicController
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->redirect('chat/chat/index');
     }
 
     /**
