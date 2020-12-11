@@ -14,7 +14,7 @@ $script = <<< JS
         data_send['$csrfParam'] = '$csrfToken';
         data_send['msg'] = $("#text_p").val();
         $.ajax({
-            url: this_host + "/chat/basic/set_message",
+            url: this_host + "/chat/index/set_message",
             async: false,
             type: 'POST',
             dataType: 'JSON',
@@ -34,7 +34,7 @@ $script = <<< JS
         let data_send = { };
         data_send['$csrfParam'] = '$csrfToken';
         $.ajax({
-            url: this_host + "/chat/basic/get_message",
+            url: this_host + "/chat/index/get_message",
             async: false,
             type: 'POST',
             dataType: 'JSON',
