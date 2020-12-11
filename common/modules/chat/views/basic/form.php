@@ -43,7 +43,7 @@ $script = <<< JS
             success: function (msg) {
                 if (msg.error == 'no') {
                     $("#chat_table").text('')
-                    $("#chat_table").text(msg.data);
+                    $("#chat_table").html(msg.data);
                 }
             },
         });
