@@ -68,8 +68,12 @@ class BasicController extends Controller
     {
         $this->init_ajax();
         $model = new Chat();
-        $model->msg = Yii::$app->request->post('msg');
+        $model->msg = trim(Yii::$app->request->post('msg'));
         $model->user_id = Yii::$app->user->identity->id;
+        if ($model->msg == '') {
+            $this->error = 'yes';
+            $this->msg = 'Пустое сообщение не передается';
+        }
         if ($model->validate()) {
             $model->save();
             $this->error = 'no';
