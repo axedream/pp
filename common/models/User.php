@@ -5,6 +5,7 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
 
 /**
@@ -20,6 +21,7 @@ use yii\web\IdentityInterface;
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
+ * @property integer $role
  * @property string $password write-only password
  */
 class User extends ActiveRecord implements IdentityInterface
@@ -27,6 +29,9 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
+
+    const ROLE_ADMIN = 10;
+    const ROLE_USER = 1;
 
 
     /**
@@ -55,7 +60,82 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+            [['role'],'integer']
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username' => 'Имя пользователя',
+        ];
+    }
+
+
+
+    /**
+     * Читаем роли
+     *
+     * @return array
+     */
+    public static function getRoleArray()
+    {
+        return [
+            self::ROLE_USER => 'Пользователь',
+            self::ROLE_ADMIN => 'Администратор',
+        ];
+    }
+
+    /**
+     * Статусы пользователей
+     *
+     * @return array
+     */
+    public static function getStatusesArray()
+    {
+        return [
+            self::STATUS_DELETED => 'Удален',
+            self::STATUS_ACTIVE => 'Активен',
+            self::STATUS_INACTIVE => 'Заблокирован/Новый'
+        ];
+    }
+
+    /**
+     * Получаем список статусов
+     *
+     * @return mixed
+     * @throws \Exception
+     */
+    public function getStatusName()
+    {
+        return ArrayHelper::getValue(self::getStatusesArray(), $this->status);
+    }
+
+
+    /**
+     * Получаем список статусов
+     *
+     * @return mixed
+     * @throws \Exception
+     */
+    public function getRoleName()
+    {
+        return ArrayHelper::getValue(self::getRoleArray(), $this->role);
+    }
+
+
+    public function getIsAdmin()
+    {
+        return ($this->role == self::ROLE_ADMIN);
+    }
+
+
+    public function isUser()
+    {
+        return ($this->role == self::ROLE_USER);
     }
 
     /**

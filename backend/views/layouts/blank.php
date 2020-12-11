@@ -19,7 +19,7 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body class="blank">
+<body class="blank" style="background-color: #dfdfdf">
 <?php $this->beginBody() ?>
 
 <div class="container">
