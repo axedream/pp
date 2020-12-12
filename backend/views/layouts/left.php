@@ -4,7 +4,7 @@
 
 
         <?php
-            $user = ($this->contect->user && $this->context->user->isAdmin) ? ['label' => 'Пользователи', 'icon' => 'user', 'url' => ['/user/index']] : [];
+            $user = ($this->context->user && $this->context->user->isAdmin) ? ['label' => 'Пользователи', 'icon' => 'user', 'url' => ['/user/index']] : [];
         ?>
 
         <?= dmstr\widgets\Menu::widget(
