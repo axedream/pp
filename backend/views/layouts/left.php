@@ -4,7 +4,7 @@
 
 
         <?php
-            $user = ($this->context->user && $this->context->user->isAdmin) ? ['label' => 'Пользователи', 'icon' => 'user', 'url' => ['/user/index']] : [];
+            $usert = ($user && $user->isAdmin) ? ['label' => 'Пользователи', 'icon' => 'user', 'url' => ['/user/index']] : [];
         ?>
 
         <?= dmstr\widgets\Menu::widget(
@@ -12,7 +12,7 @@
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
                     ['label' => 'Чат', 'icon' => 'heart', 'url' => ['/chat']],
-                    $user,
+                    $usert,
                 ],
             ]
         ) ?>
