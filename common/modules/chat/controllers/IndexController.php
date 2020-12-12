@@ -14,7 +14,7 @@ class IndexController extends BasicController
     public function actionGet_message()
     {
         $this->init_ajax();
-        if ($this->user->isAdmin) {
+        if ($this->user && $this->user->isAdmin) {
             $models = Chat::find()->all();
         } else {
             $models = Chat::find()->where(['status'=>Chat::STATUS_CORRECT])->all();
