@@ -42,18 +42,18 @@ if (Yii::$app->controller->action->id === 'login') {
 
         <?= $this->render(
             'header.php',
-            ['directoryAsset' => $directoryAsset]
+            ['directoryAsset' => $directoryAsset,'user'=> $this->context->user]
         ) ?>
 
         <?= $this->render(
             'left.php',
-            ['directoryAsset' => $directoryAsset]
+            ['directoryAsset' => $directoryAsset,'user'=> $this->context->user]
         )
         ?>
 
         <?= $this->render(
             'content.php',
-            ['content' => $content, 'directoryAsset' => $directoryAsset]
+            ['content' => $content, 'directoryAsset' => $directoryAsset,'user'=> $this->context->user]
         ) ?>
 
         <?= Yii::$app->view->renderFile('@app/views/layouts/modal_message.php'); ?>

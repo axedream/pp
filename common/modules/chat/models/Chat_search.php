@@ -5,6 +5,7 @@ namespace common\modules\chat\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\modules\chat\models\Chat;
+use Yii;
 
 /**
  * Chat_search represents the model behind the search form of `common\modules\chat\models\Chat`.
@@ -63,6 +64,10 @@ class Chat_search extends Chat
             'date_add' => $this->date_add,
             'status' => $this->status,
         ]);
+
+        if (Yii::$app->user->identity->isUser()) {
+            $query->andFilterWhere(['user_id'=>Yii::$app->user->identity->id]);
+        }
 
         $query->andFilterWhere(['like', 'msg', $this->msg]);
 

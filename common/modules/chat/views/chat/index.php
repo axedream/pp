@@ -67,19 +67,31 @@ $status = [
         return $data->statusName;
     }
 ];
-
-$element = [
-    'class' => 'yii\grid\ActionColumn',
-    'header'=>'Действия',
-    'headerOptions' => ['width' => '80'],
-    'template' => '<div style="text-align: center"><table><tr><td>{update}</td></tr></table></div>',
-    'buttons' => [
-        'update' => function ($url) {
-            return '<a href="'.$url.'" style="padding-left: 6px; padding-right: 6px;"><span class="glyphicon glyphicon-pencil"></span></a>';
-        },
-    ],
-];
-
+if ($this->context->user && $this->context->user->isAdmin) {
+    $element = [
+        'class' => 'yii\grid\ActionColumn',
+        'header' => 'Действия',
+        'headerOptions' => ['width' => '80'],
+        'template' => '<div style="text-align: center"><table><tr><td>{update}</td></tr></table></div>',
+        'buttons' => [
+            'update' => function ($url) {
+                return '<a href="' . $url . '" style="padding-left: 6px; padding-right: 6px;"><span class="glyphicon glyphicon-pencil"></span></a>';
+            },
+        ],
+    ];
+} else {
+    $element = [
+        'class' => 'yii\grid\ActionColumn',
+        'header' => 'Действия',
+        'headerOptions' => ['width' => '80'],
+        'template' => '<div style="text-align: center"><table><tr><td>{update}</td></tr></table></div>',
+        'buttons' => [
+            'update' => function ($url) {
+                return '-';
+            },
+        ],
+    ];
+}
 
 ?>
 <div class="chat-index">

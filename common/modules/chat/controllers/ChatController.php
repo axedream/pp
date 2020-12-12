@@ -59,7 +59,7 @@ class ChatController extends BasicController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($this->user && $this->user->isAdmin && $model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         }
 
