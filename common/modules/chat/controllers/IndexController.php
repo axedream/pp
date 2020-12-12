@@ -15,9 +15,9 @@ class IndexController extends BasicController
     {
         $this->init_ajax();
         if ($this->user && $this->user->isAdmin) {
-            $models = Chat::find()->all();
+            $models = Chat::find()->orderBy('id DESC')->all();
         } else {
-            $models = Chat::find()->where(['status'=>Chat::STATUS_CORRECT])->all();
+            $models = Chat::find()->where(['status'=>Chat::STATUS_CORRECT])->orderBy('id DESC')->all();
         }
         $this->error = 'no';
         $this->data = Yii::$app->view->renderAjax('@common/modules/chat/views/index/table_mess.php',['models'=>$models]);
